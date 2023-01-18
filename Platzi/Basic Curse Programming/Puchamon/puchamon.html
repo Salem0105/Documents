@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <title>Puchamon 🧬🧸</title>
+</head> 
+
+<body>
+    <div id="container">
+        <h1>Puchamon! 💧 🔥 💨 🌱 ⚡</h1>
+        <section id="pet">
+            <h2>Select a pet</h2>
+
+            <label for="watari"><img src="IMG/snorlax.png" alt="" for="watari" width="100" height="100"> Watari</label>
+            <input type="radio" name="avatar" id="watari">
+            <label for="faru"><img src="IMG/charmander.png" alt="" for="watari" width="100" height="100"> Faru</label>
+            <input type="radio" name="avatar" id="faru">
+            <label for="vanty"><img src="IMG/squirtle.png" alt="" for="watari" width="100" height="100"> Vanty</label>
+            <input type="radio" name="avatar" id="vanty">
+            <label for="taiko"><img src="IMG/bullbasaur.png" alt="" for="watari" width="100" height="100"> Taiko</label>
+            <input type="radio" name="avatar" id="taiko">
+            <label for="rutzy"><img src="IMG/pikachu.png" alt="" for="watari" width="100" height="100"> Rutzy</label>
+            <input type="radio" name="avatar" id="rutzy">
+        </section>
+        <button id="select-pet">Select</button>
+        <section id="combat">
+            <h2>Select Attack</h2>
+            <p>Your pet <span id="pet-of-player"></span> has <span id="hp-pet-player">5</span> life points</p>
+            <p>Your enemy's pet <span id="pet-of-enemy"></span> has <span id="hp-pet-enemy">5</span> life points</p>
+
+            <p>
+                <button id="water">Water 💧</button>
+                <button id="fire">Fire 🔥</button>
+                <button id="wind">Wind 💨</button>
+                <button id="earth">Earth 🌱</button>
+                <button id="light">Light⚡</button>
+            </p>
+        </section>
+
+        <section id="message">
+            <p><span id="element-player"></span><span id="element-enemy"></span>
+                <br> <span id="message-winner"></span>
+            </p>
+        </section>
+
+        <section>
+            <button id="reset">Reset</button>
+        </section>
+
+
+        <script src="JS/combatPuchamon.js"></script>
+    </div>
+</body>
+
+</html>

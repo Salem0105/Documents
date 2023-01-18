@@ -1,0 +1,27 @@
+body{
+   background: url(../Img/pixelBack.jpg) no-repeat;
+   width: 100%;
+   opacity: 0.9;
+   text-align: center;
+}
+*{
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.pet {
+   margin: 15px;
+   padding: 15px;
+}
+
+button {
+   margin: 20px;
+   padding: auto 5px;
+   border: black solid 2px;
+   border-radius: 5px;
+   background: transparent;
+}
+
+button:hover {
+   border: black solid 2px;
+   background: white;
+}

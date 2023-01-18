@@ -1,8 +1,15 @@
 let atakPlayer;
 let atakEnemy;
-let lifePlayer = 3;
-let lifeEnemy = 3;
+let lifePlayer = 5;
+let lifeEnemy = 5;
+var selectionPet;
 
+var buttonWater = document.getElementById("water");
+var buttonEarth = document.getElementById("earth");
+var buttonFire = document.getElementById("fire");
+var buttonWind = document.getElementById("wind");
+var buttonLight = document.getElementById("light");
+var buttonReset = document.getElementById("reset");
 
 function aleatory(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -12,16 +19,12 @@ function startGame() {
   let select = document.getElementById("select-pet");
   select.addEventListener("click", selectPet);
 
-  let buttonWater = document.getElementById("water");
   buttonWater.addEventListener("click", atakWater);
-  let buttonEarth = document.getElementById("earth");
   buttonEarth.addEventListener("click", atakEarth);
-  let buttonFire = document.getElementById("fire");
   buttonFire.addEventListener("click", atakFire);
-  let buttonWind = document.getElementById("wind");
   buttonWind.addEventListener("click", atakWind);
-  let buttonLight = document.getElementById("light");
   buttonLight.addEventListener("click", atakLight);
+  buttonReset.addEventListener("click", resetGame);
 }
 
 function selectPetEnemy() {
@@ -39,6 +42,8 @@ function selectPetEnemy() {
   } else {
     SpanPetEnemy.innerHTML = "Rutzy";
   }
+
+  selectionPet = 1;
 }
 
 function selectPet() {
@@ -46,19 +51,22 @@ function selectPet() {
 
   if (document.getElementById("watari").checked) {
     spanPetPlayer.innerHTML = "Watari";
+    selectPetEnemy();
   } else if (document.getElementById("faru").checked) {
     spanPetPlayer.innerHTML = "Faru";
+    selectPetEnemy();
   } else if (document.getElementById("vanty").checked) {
     spanPetPlayer.innerHTML = "Vanty";
+    selectPetEnemy();
   } else if (document.getElementById("taiko").checked) {
     spanPetPlayer.innerHTML = "Taiko";
+    selectPetEnemy();
   } else if (document.getElementById("rutzy").checked) {
     spanPetPlayer.innerHTML = "Rutzy";
+    selectPetEnemy();
   } else {
     alert("You have not selected any pet!");
   }
-
-  selectPetEnemy();
 }
 
 function attackEnemy() {
@@ -77,39 +85,72 @@ function attackEnemy() {
 }
 
 function atakWater() {
-  atakPlayer = "Water";
-  attackEnemy();
-  combat();
+  if (selectionPet == 1) {
+    atakPlayer = "Water";
+    attackEnemy();
+    combat();
+  }
 }
 
 function atakEarth() {
-  atakPlayer = "Earth";
-  attackEnemy();
-  combat();
+  if (selectionPet == 1) {
+    atakPlayer = "Earth";
+    attackEnemy();
+    combat();
+  }
 }
 
 function atakFire() {
-  atakPlayer = "Fire";
-  attackEnemy();
-  combat();
+  if (selectionPet == 1) {
+    atakPlayer = "Fire";
+    attackEnemy();
+    combat();
+  }
 }
 
 function atakWind() {
-  atakPlayer = "Wind";
-  attackEnemy();
-  combat();
+  if (selectionPet == 1) {
+    atakPlayer = "Wind";
+    attackEnemy();
+    combat();
+  }
 }
 
 function atakLight() {
-  atakPlayer = "Light";
-  attackEnemy();
-  combat();
+  if (selectionPet == 1) {
+    atakPlayer = "Light";
+    attackEnemy();
+    combat();
+  }
+}
+
+function messageWinFinally(message) {
+  let sectionMensajes = document.getElementById("message");
+  let paragraph = document.createElement("p");
+  paragraph.innerHTML = message;
+  sectionMensajes.appendChild(paragraph);
+
+  buttonEarth.style.display = "none";
+  buttonLight.style.display = "none";
+  buttonFire.style.display = "none";
+  buttonWater.style.display = "none";
+  buttonWind.style.display = "none";
+}
+
+function reviewLive() {
+  if (lifePlayer == 0) {
+    messageWinFinally("So sorry you have finally lost this Puchamon match");
+  } else if (lifeEnemy == 0) {
+    messageWinFinally("You have finally won this Puchamon match");
+  }
 }
 
 function combat() {
   let messageWin = document.getElementById("message-winner");
-  document.getElementById("element-player").innerHTML = atakPlayer;
-  document.getElementById("element-enemy").innerHTML = atakEnemy;
+  document.getElementById("element-player").innerHTML =
+    "Your pet attacked with " + atakPlayer;
+  document.getElementById("element-enemy").innerHTML =
+    " and the enemy's with " + atakEnemy;
   if (
     atakPlayer == atakEnemy ||
     (atakPlayer == "Water" && atakEnemy == "Wind") ||
@@ -132,9 +173,20 @@ function combat() {
     (atakPlayer == "Light" && atakEnemy == "Earth")
   ) {
     messageWin.innerHTML = "You win! 😎";
+    lifeEnemy -= 1;
   } else {
     messageWin.innerHTML = "You lose! JJAJAJA 😅😥";
+    lifePlayer -= 1;
   }
+
+  document.getElementById("hp-pet-player").innerHTML = "" + lifePlayer;
+  document.getElementById("hp-pet-enemy").innerHTML = "" + lifeEnemy;
+
+  reviewLive();
+}
+
+function resetGame() {
+  location.reload();
 }
 
 window.addEventListener("load", startGame);
