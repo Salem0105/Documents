@@ -1,27 +1,81 @@
-body{
-   background: url(../Img/pixelBack.jpg) no-repeat;
-   width: 100%;
-   opacity: 0.9;
-   text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+background: #344D67;
+font-family: 'Press Start 2P', cursive;
 }
-*{
-   font-family: 'Times New Roman', Times, serif;
+#section-pet{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 50%;
+   width: 100%;
+}
+
+#title{
+   color: #F3ECB0;
+   font-size: 32px;
+}
+
+.subtitle{
+   font-size: 24px;
+   color: #6ECCAF;
+}
+
+.cards{
+display: flex;
+}
+
+label{
+   width: 200px;
+   height: 200px;
+   background: #ADE792;
+   border: #F3ECB0 solid 15px;
+   color: #555555;
+   padding: 30px;
+   box-sizing: border-box;
+   margin: 10px;
+   border-radius: 10px;
+   font-size: 14px;
+}
+
+label:hover{
+   border: #6ECCAF solid 15px;
+}
+
+label img{
+   width: 100px;
+   height: 100px;
+   margin-bottom: 15px;
+}
+
+input{
+   display: none;
+}
+
+#select-pet{
+   padding: 15px;
+   margin: 10px;
+   border: none;
+   background: #6ECCAF;
+   color: #555555;
+   border-radius: 8px;
+   font-family: 'Press Start 2P', cursive;
+}
+
+#select-pet:hover{
+   background: #F3ECB0;
 }
 
 .pet {
-   margin: 15px;
-   padding: 15px;
+
 }
 
 button {
-   margin: 20px;
-   padding: auto 5px;
-   border: black solid 2px;
-   border-radius: 5px;
-   background: transparent;
+
 }
 
 button:hover {
-   border: black solid 2px;
-   background: white;
+
 }

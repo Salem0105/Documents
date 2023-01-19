@@ -4,13 +4,6 @@ let lifePlayer = 5;
 let lifeEnemy = 5;
 var selectionPet;
 
-var buttonWater = document.getElementById("water");
-var buttonEarth = document.getElementById("earth");
-var buttonFire = document.getElementById("fire");
-var buttonWind = document.getElementById("wind");
-var buttonLight = document.getElementById("light");
-var buttonReset = document.getElementById("reset");
-
 function aleatory(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -19,12 +12,28 @@ function startGame() {
   let select = document.getElementById("select-pet");
   select.addEventListener("click", selectPet);
 
+  let buttonWater = document.getElementById("water");
+  let buttonEarth = document.getElementById("earth");
+  let buttonFire = document.getElementById("fire");
+  let buttonWind = document.getElementById("wind");
+  let buttonLight = document.getElementById("light");
+
   buttonWater.addEventListener("click", atakWater);
   buttonEarth.addEventListener("click", atakEarth);
   buttonFire.addEventListener("click", atakFire);
   buttonWind.addEventListener("click", atakWind);
   buttonLight.addEventListener("click", atakLight);
-  buttonReset.addEventListener("click", resetGame);
+
+  let sectionCombat = document.getElementById("section-combat");
+  sectionCombat.style.display = "none";
+
+  let sectionReset = document.getElementById("section-reset");
+  sectionReset.style.display = "none";
+  
+  let sound = new Audio("../sounds/Tarea terminada (mp3cut.net).mp3");
+  tarjet.addEventListener("hover", () => {
+    sound.play();
+  });
 }
 
 function selectPetEnemy() {
@@ -44,6 +53,12 @@ function selectPetEnemy() {
   }
 
   selectionPet = 1;
+
+  let sectionCombat = document.getElementById("section-combat");
+  sectionCombat.style.display = "block";
+
+  let selectPet = document.getElementById("section-pet");
+  selectPet.style.display = "none";
 }
 
 function selectPet() {
@@ -125,16 +140,27 @@ function atakLight() {
 }
 
 function messageWinFinally(message) {
-  let sectionMensajes = document.getElementById("message");
+  let sectionMensajes = document.getElementById("section-message");
   let paragraph = document.createElement("p");
   paragraph.innerHTML = message;
   sectionMensajes.appendChild(paragraph);
 
-  buttonEarth.style.display = "none";
-  buttonLight.style.display = "none";
-  buttonFire.style.display = "none";
-  buttonWater.style.display = "none";
-  buttonWind.style.display = "none";
+  let buttonWater = document.getElementById("water");
+  let buttonEarth = document.getElementById("earth");
+  let buttonFire = document.getElementById("fire");
+  let buttonWind = document.getElementById("wind");
+  let buttonLight = document.getElementById("light");
+  buttonEarth.disabled = true;
+  buttonWater.disabled = true;
+  buttonFire.disabled = true;
+  buttonLight.disabled = true;
+  buttonWind.disabled = true;
+
+  let sectionReset = document.getElementById("section-reset");
+  sectionReset.style.display = "block";
+
+  buttonReset = document.getElementById("button-reset");
+  buttonReset.addEventListener("click", resetGame);
 }
 
 function reviewLive() {
