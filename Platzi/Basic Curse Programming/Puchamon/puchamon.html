@@ -14,48 +14,84 @@
 
 <body>
     <section id="section-pet">
-        <h1 id="title">Puchamon!</h1>
+        <h1 class="title">Puchamon!</h1>
         <h2 class="subtitle">Select a pet</h2>
 
-        <div class="cards" id="tarjet">
-            <label class="tarjet" for="watari"><img src="IMG/snorlax.png" alt="" for="watari"> Watari</label>
-            <input type="radio" name="avatar" id="watari">
-            <label class="tarjet" for="faru"><img src="IMG/charmander.png" alt="" for="watari"> Faru</label>
-            <input type="radio" name="avatar" id="faru">
-            <label class="tarjet" for="vanty"><img src="IMG/squirtle.png" alt="" for="watari"> Vanty</label>
-            <input type="radio" name="avatar" id="vanty">
-            <label class="tarjet" for="taiko"><img src="IMG/bullbasaur.png" alt="" for="watari"> Taiko</label>
-            <input type="radio" name="avatar" id="taiko">
-            <label class="tarjet" for="rutzy"><img src="IMG/pikachu.png" alt="" for="watari"> Rutzy</label>
-            <input type="radio" name="avatar" id="rutzy">
+        <div class="cards">
+            <label class="charter" for="watari">
+                <p>Watari 🌊</p>
+                <img src="IMG/watari.png" alt="">
+                <input type="radio" name="avatar" id="watari">
+            </label>
+            <label class="charter" for="faru">
+                <p>Faru 🔥</p>
+                <img src="IMG/faru.png" alt="">
+                <input type="radio" name="avatar" id="faru">
+            </label>
+
+            <label class="charter" for="vanty">
+                <p>Vanty 🍃</p>
+                <img src="IMG/vanty.png" alt="">
+                <input type="radio" name="avatar" id="vanty">
+            </label>
+
+            <label class="charter" for="taiko">
+                <p>Taiko 🗻</p>
+                <img src="IMG/taiko.png" alt="">
+                <input type="radio" name="avatar" id="taiko">
+            </label>
+
+            <label class="charter" for="rutzy">
+                <p>Rutzy ⚡</p>
+                <img src="IMG/rutzy.png" alt="">
+                <input type="radio" name="avatar" id="rutzy">
+            </label>
         </div>
-        <button id="select-pet">Select</button>
+
+        <button id="select-pet" class="buttons">Select</button>
     </section>
 
     <section id="section-combat">
+        <div class="container-pets">
+            <div class="pets-combat">
+                <div class="pet-info-50">
+                    <label class="card-info-left">
+                        <p><span id="pet-of-player"></span><span id="lifes-player"> 🤍🤍🤍🤍🤍</span></p>
+                        <img id="img-pet">
+                    </label>
+                </div>
+                <div class="pet-info-50">
+                    <label class="card-info-right">
+                        <p>PC <span id="lifes-enemy"> 🤍🤍🤍🤍🤍</span></p>
+                        <img id="img-pet-enemy">
+                    </label>
+                </div>
+            </div>
+        </div>
         <h2 class="subtitle">Select Attack</h2>
-        <p>Your pet <span id="pet-of-player"></span> has <span id="hp-pet-player">5</span> life points</p>
-        <p>Your enemy's pet <span id="pet-of-enemy"></span> has <span id="hp-pet-enemy">5</span> life points</p>
+        <div class="bottom">
+            <div class="buttons-attack">
+                <button id="water">Water 🌊</button>
+                <button id="fire">Fire 🔥</button>
+                <button id="wind">Wind 🍃</button>
+                <button id="earth">Earth 🗻</button>
+                <button id="light">Light⚡</button>
 
-        <p>
-            <button id="water">Water 💧</button>
-            <button id="fire">Fire 🔥</button>
-            <button id="wind">Wind 💨</button>
-            <button id="earth">Earth 🌱</button>
-            <button id="light">Light⚡</button>
-        </p>
+                <div id="section-reset">
+                    <button id="button-reset" class="buttons">Reset</button>
+                </div>
+            </div>
+            <div class="container-message">
+                <p>Your pet <span id="pet-of-player"></span> has <span id="hp-pet-player">5</span> life points</p>
+                <p>Your enemy's pet <span id="pet-of-enemy"></span> has <span id="hp-pet-enemy">5</span> life points</p>
+                <div id="section-message">
+                    <p><span id="element-player"></span><span id="element-enemy"></span>
+                        <br> <span id="message-winner"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
-
-    <section id="section-message">
-        <p><span id="element-player"></span><span id="element-enemy"></span>
-            <br> <span id="message-winner"></span>
-        </p>
-    </section>
-
-    <section id="section-reset">
-        <button id="button-reset">Reset</button>
-    </section>
-
 
     <script src="JS/combatPuchamon.js"></script>
 </body>

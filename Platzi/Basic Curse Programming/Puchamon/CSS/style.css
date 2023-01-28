@@ -1,81 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 body {
-background: #344D67;
-font-family: 'Press Start 2P', cursive;
+  background: #344d67;
+  font-family: "Press Start 2P", cursive;
 }
-#section-pet{
+#section-pet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  margin-top: 50px;
+  text-align: center;
+  padding: 0px;
+  color: #f3ecb0;
+  font-size: 32px;
+  width: 90%;
+}
+
+.subtitle {
+  margin: 20px;
+  text-align: center;
+  padding: 0px;
+  font-size: 20px;
+  color: #6eccaf;
+  width: 90%;
+}
+
+.cards {
+  margin: 10px;
+  /*-----------------------reponsive----------------------------*/
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  /*____________________________________________________________*/
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+}
+
+.charter {
+  width: 200px;
+  height: 200px;
+  background: #ade792;
+  border: #f3ecb0 solid 15px;
+  color: #333;
+  box-sizing: border-box;
+  margin: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.charter:hover {
+  border: #6eccaf solid 15px;
+}
+
+label {
+  margin: 10px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+input {
+  display: none;
+}
+
+.buttons {
+  padding: 15px;
+  margin: 20px;
+  border: none;
+  background: #6eccaf;
+  color: #333;
+  border-radius: 8px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.buttons:hover {
+  background: #eb5080;
+}
+
+#section-combat {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.container-pets {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.pets-combat {
+   margin: 10px;
+  border: #6eccaf solid 5px;
+  border-radius: 15px;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.pet-info-50 {
+  width: 35%;
+  color: #222;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-info-left {
+  margin-bottom: 100px;
+}
+
+.card-info-right {
+  margin-top: 100px;
+}
+
+.pet-info-50 img{
+   
+}
+
+.bottom{
    display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   height: 50%;
-   width: 100%;
 }
 
-#title{
-   color: #F3ECB0;
-   font-size: 32px;
+.buttons-attack {
+   margin: 20px;
 }
 
-.subtitle{
-   font-size: 24px;
-   color: #6ECCAF;
-}
-
-.cards{
-display: flex;
-}
-
-label{
-   width: 200px;
-   height: 200px;
-   background: #ADE792;
-   border: #F3ECB0 solid 15px;
-   color: #555555;
-   padding: 30px;
-   box-sizing: border-box;
-   margin: 10px;
-   border-radius: 10px;
-   font-size: 14px;
-}
-
-label:hover{
-   border: #6ECCAF solid 15px;
-}
-
-label img{
-   width: 100px;
-   height: 100px;
-   margin-bottom: 15px;
-}
-
-input{
-   display: none;
-}
-
-#select-pet{
-   padding: 15px;
-   margin: 10px;
-   border: none;
-   background: #6ECCAF;
-   color: #555555;
-   border-radius: 8px;
-   font-family: 'Press Start 2P', cursive;
-}
-
-#select-pet:hover{
-   background: #F3ECB0;
-}
-
-.pet {
-
-}
-
-button {
-
-}
-
-button:hover {
-
+.container-message {
+   margin: 20px;
 }
