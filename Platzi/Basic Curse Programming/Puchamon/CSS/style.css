@@ -22,12 +22,10 @@ body {
 }
 
 .subtitle {
-  margin: 20px;
+  font-size: auto; 
+  width: 100%;
   text-align: center;
-  padding: 0px;
-  font-size: 20px;
   color: #6eccaf;
-  width: 90%;
 }
 
 .cards {
@@ -76,9 +74,13 @@ input {
   display: none;
 }
 
+input:checked + label {
+  background-color: #eb5080;
+}
+
 .buttons {
   padding: 15px;
-  margin: 20px;
+  margin: 5px;
   border: none;
   background: #6eccaf;
   color: #333;
@@ -91,8 +93,9 @@ input {
 }
 
 #section-combat {
-  display: flex;
+  width: 100%;
   height: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -108,8 +111,8 @@ input {
 }
 
 .pets-combat {
-   margin: 10px;
-  border: #6eccaf solid 5px;
+  margin: 10px;
+  border: #eb5080 solid 5px;
   border-radius: 15px;
   width: 60%;
   display: flex;
@@ -120,8 +123,6 @@ input {
 
 .pet-info-50 {
   width: 35%;
-  color: #222;
-  border-radius: 10px;
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -129,26 +130,81 @@ input {
   align-items: center;
 }
 
-.card-info-left {
+.card-info-left p {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 100px;
 }
 
-.card-info-right {
+.card-info-right p {
+  display: flex;
+  flex-direction: column;
   margin-top: 100px;
 }
 
-.pet-info-50 img{
-   
+.pet-info-50 span{
+  margin: 5px;
 }
 
-.bottom{
-   display: flex;
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .buttons-attack {
-   margin: 20px;
+  margin: 5px;
+  padding: 15px;
+  width: 50%;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-element {
+  padding: 15px;
+  background: #ade792;
+  border-radius: 10px;
+  border: #ade770 solid 5px;
+}
+
+.button-element:hover{
+  border: #ade792 solid 5px;
 }
 
 .container-message {
-   margin: 20px;
+  height: 180px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 5px;
+  padding: 15px;
+  width: 50%;
+  overflow-y: scroll;
+  
+}
+
+#spann{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#spann p{
+  margin: 5px;
+}
+
+
+@media (max-width: 560px) {
+  .bottom{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .buttons-attack, .container-message{
+    width: 100%;
+  }
 }

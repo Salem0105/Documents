@@ -36,27 +36,25 @@ function startGame() {
     sound.play();
   }); 
   */
+
+  /*   var sound = new Audio();
+  sound.src = "../sounds/Tarea-terminada.mp3"; */
 }
 
 function selectPetEnemy() {
-  let SpanPetEnemy = document.getElementById("pet-of-enemy");
+  /*   let SpanPetEnemy = document.getElementById("pet-of-enemy"); */
   let imgPetEnemy = document.getElementById("img-pet-enemy");
 
   let enemy = aleatory(1, 5);
   if (enemy == 1) {
-    SpanPetEnemy.innerHTML = "Watari";
     imgPetEnemy.src = "IMG/watari.png";
   } else if (enemy == 2) {
-    SpanPetEnemy.innerHTML = "Faru";
     imgPetEnemy.src = "IMG/faru.png";
   } else if (enemy == 3) {
-    SpanPetEnemy.innerHTML = "Vanty";
     imgPetEnemy.src = "IMG/vanty.png";
   } else if (enemy == 4) {
-    SpanPetEnemy.innerHTML = "Taiko";
     imgPetEnemy.src = "IMG/taiko.png";
   } else {
-    SpanPetEnemy.innerHTML = "Rutzy";
     imgPetEnemy.src = "IMG/rutzy.png";
   }
 
@@ -216,11 +214,9 @@ function reviewLive() {
 }
 
 function combat() {
-  let messageWin = document.getElementById("message-winner");
-  document.getElementById("element-player").innerHTML =
-    "Your pet attacked with " + atakPlayer;
-  document.getElementById("element-enemy").innerHTML =
-    " and the enemy's with " + atakEnemy;
+  let plays = document.getElementById("spann");
+  let spanPlayerEnemy = document.createElement("p");
+
   if (
     atakPlayer == atakEnemy ||
     (atakPlayer == "Water" && atakEnemy == "Wind") ||
@@ -234,7 +230,6 @@ function combat() {
     (atakPlayer == "Light" && atakEnemy == "Fire") ||
     (atakPlayer == "Light" && atakEnemy == "Water")
   ) {
-    messageWin.innerHTML = "Hand to hand 🤝🏻";
   } else if (
     (atakPlayer == "Earth" && atakEnemy == "Water") ||
     (atakPlayer == "Water" && atakEnemy == "Fire") ||
@@ -243,25 +238,20 @@ function combat() {
     (atakPlayer == "Light" && atakEnemy == "Earth")
   ) {
     lifeEnemy -= 1;
-    console.log(lifeEnemy + " enemy");
-    messageWin.innerHTML = "You win! 😎";
 
     let flagEnemy = document.getElementById("lifes-enemy");
     let imgPetEnemy = document.getElementById("img-pet-enemy");
     drawHeart(lifeEnemy, flagEnemy, imgPetEnemy);
   } else {
     lifePlayer -= 1;
-    console.log(lifePlayer + " player");
-    messageWin.innerHTML = "You lose! JJAJAJA 😅😥";
 
     let flagPlayer = document.getElementById("lifes-player");
     let imgPetPlayer = document.getElementById("img-pet");
     drawHeart(lifePlayer, flagPlayer, imgPetPlayer);
   }
 
-  document.getElementById("hp-pet-player").innerHTML = "" + lifePlayer;
-  document.getElementById("hp-pet-enemy").innerHTML = "" + lifeEnemy;
-
+  spanPlayerEnemy.innerHTML = atakPlayer + " - " + atakEnemy;
+  plays.appendChild(spanPlayerEnemy);
   reviewLive();
 }
 

@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
-
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/743/743977.png" class="rel" />
 
     <title>Puchamon</title>
@@ -18,75 +17,73 @@
         <h2 class="subtitle">Select a pet</h2>
 
         <div class="cards">
+            <input type="radio" name="avatar" id="watari">
             <label class="charter" for="watari">
                 <p>Watari 🌊</p>
                 <img src="IMG/watari.png" alt="">
-                <input type="radio" name="avatar" id="watari">
             </label>
+            <input type="radio" name="avatar" id="faru">
             <label class="charter" for="faru">
                 <p>Faru 🔥</p>
                 <img src="IMG/faru.png" alt="">
-                <input type="radio" name="avatar" id="faru">
             </label>
-
+            <input type="radio" name="avatar" id="vanty">
             <label class="charter" for="vanty">
                 <p>Vanty 🍃</p>
                 <img src="IMG/vanty.png" alt="">
-                <input type="radio" name="avatar" id="vanty">
             </label>
-
+            <input type="radio" name="avatar" id="taiko">
             <label class="charter" for="taiko">
                 <p>Taiko 🗻</p>
                 <img src="IMG/taiko.png" alt="">
-                <input type="radio" name="avatar" id="taiko">
             </label>
-
+            <input type="radio" name="avatar" id="rutzy">
             <label class="charter" for="rutzy">
                 <p>Rutzy ⚡</p>
                 <img src="IMG/rutzy.png" alt="">
-                <input type="radio" name="avatar" id="rutzy">
             </label>
         </div>
 
         <button id="select-pet" class="buttons">Select</button>
     </section>
-
+    <!----------------------------------- PRIMERA PARTE DEL CÓDIGO------------------------------------------>
     <section id="section-combat">
         <div class="container-pets">
             <div class="pets-combat">
                 <div class="pet-info-50">
                     <label class="card-info-left">
-                        <p><span id="pet-of-player"></span><span id="lifes-player"> 🤍🤍🤍🤍🤍</span></p>
-                        <img id="img-pet">
+                        <p><span id="pet-of-player"></span><span id="lifes-player"> 🤍🤍🤍🤍🤍</span> <img id="img-pet">
+                        </p>
                     </label>
                 </div>
                 <div class="pet-info-50">
                     <label class="card-info-right">
-                        <p>PC <span id="lifes-enemy"> 🤍🤍🤍🤍🤍</span></p>
-                        <img id="img-pet-enemy">
+                        <p>PC <span id="lifes-enemy"> 🤍🤍🤍🤍🤍</span> <img id="img-pet-enemy"></p>
                     </label>
                 </div>
             </div>
         </div>
-        <h2 class="subtitle">Select Attack</h2>
+
         <div class="bottom">
             <div class="buttons-attack">
-                <button id="water">Water 🌊</button>
-                <button id="fire">Fire 🔥</button>
-                <button id="wind">Wind 🍃</button>
-                <button id="earth">Earth 🗻</button>
-                <button id="light">Light⚡</button>
+                <h2 class="subtitle">Select Attack</h2>
+                <button class="button-element" id="water">Water 🌊</button>
+                <button class="button-element" id="fire">Fire 🔥</button>
+                <button class="button-element" id="wind">Wind 🍃</button>
+                <button class="button-element" id="earth">Earth 🗻</button>
+                <button class="button-element" id="light">Light ⚡</button>
 
                 <div id="section-reset">
                     <button id="button-reset" class="buttons">Reset</button>
                 </div>
             </div>
             <div class="container-message">
-                <p>Your pet <span id="pet-of-player"></span> has <span id="hp-pet-player">5</span> life points</p>
-                <p>Your enemy's pet <span id="pet-of-enemy"></span> has <span id="hp-pet-enemy">5</span> life points</p>
+                <h2 class="subtitle">Historic</h2>
+                <p><!-- <span id="pet-of-player"></span><span id="hp-pet-player"></span> --></p>
+                <p><!-- <span id="pet-of-enemy"></span><span id="hp-pet-enemy"></span> --></p>
                 <div id="section-message">
-                    <p><span id="element-player"></span><span id="element-enemy"></span>
-                        <br> <span id="message-winner"></span>
+                    <p id="spann"><!-- <span id="element-player"></span><span id="element-enemy"></span> -->
+                        <!-- <br> <span id="message-winner"></span> -->
                     </p>
                 </div>
             </div>
