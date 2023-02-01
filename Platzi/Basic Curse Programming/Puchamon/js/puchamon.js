@@ -4,19 +4,29 @@ let lifePlayer = 5;
 let lifeEnemy = 5;
 var selectionPet;
 
+let select = document.getElementById("select-pet");
+let buttonWater = document.getElementById("water");
+let buttonEarth = document.getElementById("earth");
+let buttonFire = document.getElementById("fire");
+let buttonWind = document.getElementById("wind");
+let buttonLight = document.getElementById("light");
+
+let sectionCombat = document.getElementById("section-combat");
+let sectionReset = document.getElementById("section-reset");
+let selectPet = document.getElementById("section-pet");
+let imgPetEnemy = document.getElementById("img-pet-enemy");
+
+let spanPetPlayer = document.getElementById("pet-of-player");
+let imgPet = document.getElementById("img-pet");
+
+let sectionMensajes = document.getElementById("section-message");
+
 function aleatory(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function startGame() {
-  let select = document.getElementById("select-pet");
   select.addEventListener("click", selectPet);
-
-  let buttonWater = document.getElementById("water");
-  let buttonEarth = document.getElementById("earth");
-  let buttonFire = document.getElementById("fire");
-  let buttonWind = document.getElementById("wind");
-  let buttonLight = document.getElementById("light");
 
   buttonWater.addEventListener("click", atakWater);
   buttonEarth.addEventListener("click", atakEarth);
@@ -24,27 +34,11 @@ function startGame() {
   buttonWind.addEventListener("click", atakWind);
   buttonLight.addEventListener("click", atakLight);
 
-  let sectionCombat = document.getElementById("section-combat");
   sectionCombat.style.display = "none";
-
-  let sectionReset = document.getElementById("section-reset");
   sectionReset.style.display = "none";
-
-  /* let tarjet = document.getElementById("tarjet");
-  let sound = new Audio("../sounds/Tarea-terminada.mp3");
-  tarjet.addEventListener('click', () => {
-    sound.play();
-  }); 
-  */
-
-  /*   var sound = new Audio();
-  sound.src = "../sounds/Tarea-terminada.mp3"; */
 }
 
 function selectPetEnemy() {
-  /*   let SpanPetEnemy = document.getElementById("pet-of-enemy"); */
-  let imgPetEnemy = document.getElementById("img-pet-enemy");
-
   let enemy = aleatory(1, 5);
   if (enemy == 1) {
     imgPetEnemy.src = "IMG/watari.png";
@@ -58,17 +52,11 @@ function selectPetEnemy() {
     imgPetEnemy.src = "IMG/rutzy.png";
   }
 
-  let sectionCombat = document.getElementById("section-combat");
   sectionCombat.style.display = "flex";
-
-  let selectPet = document.getElementById("section-pet");
   selectPet.style.display = "none";
 }
 
 function selectPet() {
-  let spanPetPlayer = document.getElementById("pet-of-player");
-  let imgPet = document.getElementById("img-pet");
-
   if (document.getElementById("watari").checked) {
     spanPetPlayer.innerHTML = "Watari ";
     imgPet.src = "IMG/watari.png";
@@ -155,23 +143,16 @@ function atakLight() {
 }
 
 function messageWinFinally(message) {
-  let sectionMensajes = document.getElementById("section-message");
   let paragraph = document.createElement("p");
   paragraph.innerHTML = message;
   sectionMensajes.appendChild(paragraph);
 
-  let buttonWater = document.getElementById("water");
-  let buttonEarth = document.getElementById("earth");
-  let buttonFire = document.getElementById("fire");
-  let buttonWind = document.getElementById("wind");
-  let buttonLight = document.getElementById("light");
   buttonEarth.disabled = true;
   buttonWater.disabled = true;
   buttonFire.disabled = true;
   buttonLight.disabled = true;
   buttonWind.disabled = true;
 
-  let sectionReset = document.getElementById("section-reset");
   sectionReset.style.display = "block";
 
   buttonReset = document.getElementById("button-reset");
@@ -240,13 +221,11 @@ function combat() {
     lifeEnemy -= 1;
 
     let flagEnemy = document.getElementById("lifes-enemy");
-    let imgPetEnemy = document.getElementById("img-pet-enemy");
     drawHeart(lifeEnemy, flagEnemy, imgPetEnemy);
   } else {
     lifePlayer -= 1;
 
     let flagPlayer = document.getElementById("lifes-player");
-    let imgPetPlayer = document.getElementById("img-pet");
     drawHeart(lifePlayer, flagPlayer, imgPetPlayer);
   }
 
@@ -258,14 +237,5 @@ function combat() {
 function resetGame() {
   location.reload();
 }
-
-window.addEventListener("load", startGame);
-
-/*
-Recordaré que hay una función que se ejecuta cada vez que se carga la página, 
-hay una propiedad que me perimite crear un objeto HTML desde JAVASCRIPT:
-function crearMensaje(resultado){let sectionMensajes=document.getElementById('mensajes')
-let parrafo=document.createElement('p')
-parrafo.innerHTML='Tu mascota atacó con '+ataqueJugador+', las mascota del enemigo atacó con '+ataqueEnemigo+'- '+resultado
-sectionMensajes.appendChild(parrafo)}
- */
+/* 
+window.addEventListener("load", startGame); */
