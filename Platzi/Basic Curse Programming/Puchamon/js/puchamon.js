@@ -2,7 +2,11 @@ let atakPlayer;
 let atakEnemy;
 let lifePlayer = 5;
 let lifeEnemy = 5;
-var selectionPet;
+let selectionPetPlayer;
+let enemy;
+let framePuchamon;
+
+const cardContainer = document.getElementById("card-container");
 
 let select = document.getElementById("select-pet");
 let buttonWater = document.getElementById("water");
@@ -11,9 +15,15 @@ let buttonFire = document.getElementById("fire");
 let buttonWind = document.getElementById("wind");
 let buttonLight = document.getElementById("light");
 
+let inputWatari;
+let inputFaru;
+let inputVanty;
+let inputTaiko;
+let inputRutzy;
+
 let sectionCombat = document.getElementById("section-combat");
 let sectionReset = document.getElementById("section-reset");
-let selectPet = document.getElementById("section-pet");
+let sectionSelectPet = document.getElementById("section-pet");
 let imgPetEnemy = document.getElementById("img-pet-enemy");
 
 let spanPetPlayer = document.getElementById("pet-of-player");
@@ -21,12 +31,87 @@ let imgPet = document.getElementById("img-pet");
 
 let sectionMensajes = document.getElementById("section-message");
 
+let puchamones = [];
+
+class Puchamon {
+  constructor(name, img, life) {
+    this.name = name;
+    this.img = img;
+    this.life = life;
+    this.atacks = [];
+  }
+}
+
+let watari = new Puchamon("Watari 🌊", "img/watari.png", 5);
+let faru = new Puchamon("Faru 🔥", "img/faru.png", 5);
+let vanty = new Puchamon("Vanty 🍃", "img/vanty.png", 5);
+let taiko = new Puchamon("Taiko 🗻", "img/taiko.png", 5);
+let rutzy = new Puchamon("Rutzy ⚡", "img/rutzy.png", 5);
+
+watari.atacks.push(
+  { name: "🌊", id: "water" },
+  { name: "🌊", id: "water" },
+  { name: "🌊", id: "water" },
+  { name: "🍃", id: "wind" },
+  { name: "⚡", id: "light" }
+);
+
+faru.atacks.push(
+  { name: "🔥", id: "fire" },
+  { name: "🔥", id: "fire" },
+  { name: "🔥", id: "fire" },
+  { name: "🗻", id: "earth" },
+  { name: "⚡", id: "light" }
+);
+
+vanty.atacks.push(
+  { name: "🍃", id: "wind" },
+  { name: "🍃", id: "wind" },
+  { name: "🍃", id: "wind" },
+  { name: "🗻", id: "earth" },
+  { name: "🌊", id: "water" }
+);
+
+rutzy.atacks.push(
+  { name: "⚡", id: "light" },
+  { name: "⚡", id: "light" },
+  { name: "⚡", id: "light" },
+  { name: "🔥", id: "fire" },
+  { name: "🌊", id: "water" }
+);
+
+taiko.atacks.push(
+  { name: "🗻", id: "earth" },
+  { name: "🗻", id: "earth" },
+  { name: "🗻", id: "earth" },
+  { name: "🍃", id: "wind" },
+  { name: "🔥", id: "fire" }
+);
+
+puchamones.push(watari, faru, vanty, taiko, rutzy);
+
 function aleatory(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function startGame() {
   select.addEventListener("click", selectPet);
+
+  /* Se hace uso de algo llamado templates literarios, para poder fusionar el JS con el HTML, se hace con comillas invertidas */
+  puchamones.forEach((puchamon) => {
+    framePuchamon = `<input type="radio" name="avatar" id="${puchamon.name}" />
+    <label class="charter" for="${puchamon.name}">
+        <p>${puchamon.name}</p>
+        <img src="${puchamon.img}" alt="">
+    </label>`;
+    cardContainer.innerHTML += framePuchamon;
+
+    inputWatari = document.getElementById("Watari 🌊");
+    inputFaru = document.getElementById("Faru 🔥");
+    inputVanty = document.getElementById("Vanty 🍃");
+    inputTaiko = document.getElementById("Taiko 🗻");
+    inputRutzy = document.getElementById("Rutzy ⚡");
+  });
 
   buttonWater.addEventListener("click", atakWater);
   buttonEarth.addEventListener("click", atakEarth);
@@ -39,63 +124,65 @@ function startGame() {
 }
 
 function selectPetEnemy() {
-  let enemy = aleatory(1, 5);
-  if (enemy == 1) {
-    imgPetEnemy.src = "IMG/watari.png";
-  } else if (enemy == 2) {
-    imgPetEnemy.src = "IMG/faru.png";
-  } else if (enemy == 3) {
-    imgPetEnemy.src = "IMG/vanty.png";
-  } else if (enemy == 4) {
-    imgPetEnemy.src = "IMG/taiko.png";
-  } else {
-    imgPetEnemy.src = "IMG/rutzy.png";
-  }
-
+  enemy = aleatory(0, puchamones.length - 1);
+  imgPetEnemy.src = puchamones[enemy].img;
   sectionCombat.style.display = "flex";
-  selectPet.style.display = "none";
+  sectionSelectPet.style.display = "none";
 }
 
 function selectPet() {
-  if (document.getElementById("watari").checked) {
+  var radios = document.getElementsByName("avatar");
+  for (var radio of radios) {
+    if (radio.checked) {
+      spanPetPlayer.innerHTML = radio.id;
+      puchamones.forEach((puchamon) => {
+        if (puchamon.name == radio.id) {
+          imgPet.src = puchamon.img;
+        }
+      });
+      selectPetEnemy();
+    }
+  }
+
+   if (inputWatari.checked) {
     spanPetPlayer.innerHTML = "Watari ";
     imgPet.src = "IMG/watari.png";
     selectPetEnemy();
-    selectionPet = 1;
-  } else if (document.getElementById("faru").checked) {
+    selectionPetPlayer = 1;
+  } else if (inputFaru.checked) {
     spanPetPlayer.innerHTML = "Faru ";
     imgPet.src = "IMG/faru.png";
     selectPetEnemy();
-    selectionPet = 2;
-  } else if (document.getElementById("vanty").checked) {
+    selectionPetPlayer = 2;
+  } else if (inputVanty.checked) {
     spanPetPlayer.innerHTML = "Vanty ";
     imgPet.src = "IMG/vanty.png";
     selectPetEnemy();
-    selectionPet = 3;
-  } else if (document.getElementById("taiko").checked) {
+    selectionPetPlayer = 3;
+  } else if (inputTaiko.checked) {
     spanPetPlayer.innerHTML = "Taiko ";
     imgPet.src = "IMG/taiko.png";
     selectPetEnemy();
-    selectionPet = 4;
-  } else if (document.getElementById("rutzy").checked) {
+    selectionPetPlayer = 4;
+  } else if (inputRutzy.checked) {
     spanPetPlayer.innerHTML = "Rutzy ";
     imgPet.src = "IMG/rutzy.png";
     selectPetEnemy();
-    selectionPet = 5;
+    selectionPetPlayer = 5;
   } else {
     alert("You have not selected any pet!");
   }
 }
 
 function attackEnemy() {
-  let enemy = aleatory(1, 5);
-  if (enemy == 1) {
+  let enemyAtak = aleatory(1, 5);
+  if (enemyAtak == 1) {
     atakEnemy = "Water";
-  } else if (enemy == 2) {
+  } else if (enemyAtak == 2) {
     atakEnemy = "Earth";
-  } else if (enemy == 3) {
+  } else if (enemyAtak == 3) {
     atakEnemy = "Fire";
-  } else if (enemy == 4) {
+  } else if (enemyAtak == 4) {
     atakEnemy = "Wind";
   } else {
     atakEnemy = "Light";
@@ -103,43 +190,33 @@ function attackEnemy() {
 }
 
 function atakWater() {
-  if (selectionPet != null) {
-    atakPlayer = "Water";
-    attackEnemy();
-    combat();
-  }
+  atakPlayer = "Water";
+  attackEnemy();
+  combat();
 }
 
 function atakEarth() {
-  if (selectionPet != null) {
-    atakPlayer = "Earth";
-    attackEnemy();
-    combat();
-  }
+  atakPlayer = "Earth";
+  attackEnemy();
+  combat();
 }
 
 function atakFire() {
-  if (selectionPet != null) {
-    atakPlayer = "Fire";
-    attackEnemy();
-    combat();
-  }
+  atakPlayer = "Fire";
+  attackEnemy();
+  combat();
 }
 
 function atakWind() {
-  if (selectionPet != null) {
-    atakPlayer = "Wind";
-    attackEnemy();
-    combat();
-  }
+  atakPlayer = "Wind";
+  attackEnemy();
+  combat();
 }
 
 function atakLight() {
-  if (selectionPet != null) {
-    atakPlayer = "Light";
-    attackEnemy();
-    combat();
-  }
+  atakPlayer = "Light";
+  attackEnemy();
+  combat();
 }
 
 function messageWinFinally(message) {
@@ -159,7 +236,7 @@ function messageWinFinally(message) {
   buttonReset.addEventListener("click", resetGame);
 }
 
-function drawHeart(lives, player, img) {
+function drawHeart(lives, player, img, selected) {
   if (lives == 5) {
     player.innerHTML = " 🤍🤍🤍🤍🤍";
   } else if (lives == 4) {
@@ -172,15 +249,15 @@ function drawHeart(lives, player, img) {
     player.innerHTML = " 🤍";
   } else {
     player.innerHTML = "";
-    if (selectionPet == 1) {
+    if (selected == 1) {
       img.src = "IMG/watari-die.png";
-    } else if (selectionPet == 2) {
+    } else if (selected == 2) {
       img.src = "IMG/faru-die.png";
-    } else if (selectionPet == 3) {
+    } else if (selected == 3) {
       img.src = "IMG/vanty-die.png";
-    } else if (selectionPet == 4) {
+    } else if (selected == 4) {
       img.src = "IMG/taiko-die.png";
-    } else if (selectionPet == 5) {
+    } else if (selected == 5) {
       img.src = "IMG/rutzy-die.png";
     }
   }
@@ -196,7 +273,7 @@ function reviewLive() {
 
 function combat() {
   let plays = document.getElementById("spann");
-  let spanPlayerEnemy = document.createElement("p");
+  let span = document.createElement("p");
 
   if (
     atakPlayer == atakEnemy ||
@@ -219,23 +296,25 @@ function combat() {
     (atakPlayer == "Light" && atakEnemy == "Earth")
   ) {
     lifeEnemy -= 1;
-
+    /* Cambiar imagen del puchamon enemigo */
     let flagEnemy = document.getElementById("lifes-enemy");
-    drawHeart(lifeEnemy, flagEnemy, imgPetEnemy);
+    drawHeart(lifeEnemy, flagEnemy, imgPetEnemy, enemy);
+    console.log(enemy);
   } else {
     lifePlayer -= 1;
-
+    /* cambiar imagen del puchamon elegido por el usuario  */
     let flagPlayer = document.getElementById("lifes-player");
-    drawHeart(lifePlayer, flagPlayer, imgPetPlayer);
+    drawHeart(lifePlayer, flagPlayer, imgPet, selectionPetPlayer);
+    console.log(selectionPetPlayer);
   }
 
-  spanPlayerEnemy.innerHTML = atakPlayer + " - " + atakEnemy;
-  plays.appendChild(spanPlayerEnemy);
+  span.innerHTML = atakPlayer + " - " + atakEnemy;
+  plays.appendChild(span);
   reviewLive();
 }
 
 function resetGame() {
   location.reload();
 }
-/* 
-window.addEventListener("load", startGame); */
+
+window.addEventListener("load", startGame);
