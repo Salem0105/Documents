@@ -5,21 +5,26 @@ let lifeEnemy = 5;
 let selectionPetPlayer;
 let enemy;
 let framePuchamon;
+let frameAttacks;
+let attacks = [];
 
 const cardContainer = document.getElementById("card-container");
 
 let select = document.getElementById("select-pet");
-let buttonWater = document.getElementById("water");
-let buttonEarth = document.getElementById("earth");
-let buttonFire = document.getElementById("fire");
-let buttonWind = document.getElementById("wind");
-let buttonLight = document.getElementById("light");
 
 let inputWatari;
 let inputFaru;
 let inputVanty;
 let inputTaiko;
 let inputRutzy;
+
+const attacksContainer = document.getElementById("attacks-container");
+
+let buttonWater;
+let buttonEarth;
+let buttonFire;
+let buttonWind;
+let buttonLight;
 
 let sectionCombat = document.getElementById("section-combat");
 let sectionReset = document.getElementById("section-reset");
@@ -31,6 +36,7 @@ let imgPet = document.getElementById("img-pet");
 
 let sectionMensajes = document.getElementById("section-message");
 
+/*En esta sección se agregan y modifican a los puchamones, toca manualmente por ahora */
 let puchamones = [];
 
 class Puchamon {
@@ -48,6 +54,7 @@ let vanty = new Puchamon("Vanty 🍃", "img/vanty.png", 5);
 let taiko = new Puchamon("Taiko 🗻", "img/taiko.png", 5);
 let rutzy = new Puchamon("Rutzy ⚡", "img/rutzy.png", 5);
 
+/* Por este lado se agregan los ataques personalizados de cada puchamon */
 watari.atacks.push(
   { name: "🌊", id: "water" },
   { name: "🌊", id: "water" },
@@ -97,7 +104,7 @@ function aleatory(min, max) {
 function startGame() {
   select.addEventListener("click", selectPet);
 
-  /* Se hace uso de algo llamado templates literarios, para poder fusionar el JS con el HTML, se hace con comillas invertidas */
+  /* Se hace uso de algo llamado templates literarios, para poder fusionar el JS con el HTML, se hace con comillas invertidas y las variables se agregan con ${varible}*/
   puchamones.forEach((puchamon) => {
     framePuchamon = `<input type="radio" name="avatar" id="${puchamon.name}" />
     <label class="charter" for="${puchamon.name}">
@@ -113,12 +120,6 @@ function startGame() {
     inputRutzy = document.getElementById("Rutzy ⚡");
   });
 
-  buttonWater.addEventListener("click", atakWater);
-  buttonEarth.addEventListener("click", atakEarth);
-  buttonFire.addEventListener("click", atakFire);
-  buttonWind.addEventListener("click", atakWind);
-  buttonLight.addEventListener("click", atakLight);
-
   sectionCombat.style.display = "none";
   sectionReset.style.display = "none";
 }
@@ -130,52 +131,71 @@ function selectPetEnemy() {
   sectionSelectPet.style.display = "none";
 }
 
+/* Se logró reducir el código para X cantidad de puchamones */
 function selectPet() {
   var radios = document.getElementsByName("avatar");
-  for (var radio of radios) {
-    if (radio.checked) {
-      spanPetPlayer.innerHTML = radio.id;
-      puchamones.forEach((puchamon) => {
-        if (puchamon.name == radio.id) {
-          imgPet.src = puchamon.img;
-        }
-      });
-      selectPetEnemy();
+  let countPicks = true;
+  try {
+    for (var radio of radios) {
+      if (radio.checked) {
+        spanPetPlayer.innerHTML = radio.id; //Agregar el nombre del puchamon seleccionado al span
+        selectionPetPlayer = radio.id; // Guardarlo en la variable selectionPetPlayer
+        puchamones.forEach((puchamon) => {
+          //recorrer en busca de la imagen del puchamon
+          if (puchamon.name == radio.id) {
+            imgPet.src = puchamon.img; //asignar la imagen del puchamon
+          }
+        });
+        selectPetEnemy(); //seleccionar el puchamon del enemigo
+        countPicks = false; //confirmar que se haya seleccionado un puchamon
+      }
     }
+  } catch (error) {
+    console.log(
+      "Mira lo que pasó por el careverga del usuario [ " +
+        error +
+        " ] no eres el usuario, verdad? 😐"
+    );
   }
+  if (countPicks) alert("Debes seleccionar un puchamon 🙃");
+  extractAttacks(selectionPetPlayer);
+}
 
-   if (inputWatari.checked) {
-    spanPetPlayer.innerHTML = "Watari ";
-    imgPet.src = "IMG/watari.png";
-    selectPetEnemy();
-    selectionPetPlayer = 1;
-  } else if (inputFaru.checked) {
-    spanPetPlayer.innerHTML = "Faru ";
-    imgPet.src = "IMG/faru.png";
-    selectPetEnemy();
-    selectionPetPlayer = 2;
-  } else if (inputVanty.checked) {
-    spanPetPlayer.innerHTML = "Vanty ";
-    imgPet.src = "IMG/vanty.png";
-    selectPetEnemy();
-    selectionPetPlayer = 3;
-  } else if (inputTaiko.checked) {
-    spanPetPlayer.innerHTML = "Taiko ";
-    imgPet.src = "IMG/taiko.png";
-    selectPetEnemy();
-    selectionPetPlayer = 4;
-  } else if (inputRutzy.checked) {
-    spanPetPlayer.innerHTML = "Rutzy ";
-    imgPet.src = "IMG/rutzy.png";
-    selectPetEnemy();
-    selectionPetPlayer = 5;
-  } else {
-    alert("You have not selected any pet!");
+function drawAttacks(skills) {
+  /* Agregar los botones de ataques correspondientes de cada puchamon */
+  try {
+    skills.forEach((skill) => {
+      frameAttacks = `<button class="button-element" id="${skill.name}">${skill.name}</button>`;
+      attacksContainer.innerHTML += frameAttacks;
+    });
+    buttonWater = document.getElementById("🌊");
+    buttonEarth = document.getElementById("🗻");
+    buttonFire = document.getElementById("🔥");
+    buttonLight = document.getElementById("⚡");
+    buttonWind = document.getElementById("🍃");
+
+    buttonWater.addEventListener("click", attackWater);
+    buttonEarth.addEventListener("click", attackEarth);
+    buttonFire.addEventListener("click", attackFire);
+    buttonLight.addEventListener("click", attackLight);
+    buttonWind.addEventListener("click", attackWind);
+  } catch (error) {
+    console.log(error);
   }
 }
 
+/* Extrar los ataques del puchamon seleccionado */
+function extractAttacks(idPuchamon) {
+  puchamones.forEach((puchamon) => {
+    if (puchamon.name == idPuchamon) {
+      attacks = puchamon.atacks;
+    }
+  });
+  drawAttacks(attacks);
+}
+
 function attackEnemy() {
-  let enemyAtak = aleatory(1, 5);
+  let enemyAtak = aleatory(0, puchamones.length - 1);
   if (enemyAtak == 1) {
     atakEnemy = "Water";
   } else if (enemyAtak == 2) {
@@ -189,31 +209,31 @@ function attackEnemy() {
   }
 }
 
-function atakWater() {
+function attackWater() {
   atakPlayer = "Water";
   attackEnemy();
   combat();
 }
 
-function atakEarth() {
+function attackEarth() {
   atakPlayer = "Earth";
   attackEnemy();
   combat();
 }
 
-function atakFire() {
+function attackFire() {
   atakPlayer = "Fire";
   attackEnemy();
   combat();
 }
 
-function atakWind() {
+function attackWind() {
   atakPlayer = "Wind";
   attackEnemy();
   combat();
 }
 
-function atakLight() {
+function attackLight() {
   atakPlayer = "Light";
   attackEnemy();
   combat();
